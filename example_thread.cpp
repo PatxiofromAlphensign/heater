@@ -2,7 +2,9 @@
 #include<vector>
 #include<functional>
 #include<iostream>
+#include<cstdlib>
 
+#include<t.h>
 template<typename T>
 concept cons  = requires(T){ 
 	std::is_convertible<T,unsigned int>::value;
@@ -12,12 +14,26 @@ concept cons  = requires(T){
 };
 
 template<cons T>
-struct F {
+class F {
 	std::vector<T> v;
+	public:
 	F(std::vector<T> vv) : v{vv} {}
+	static constexpr int val = 1;
+	using array_t = std::array<T, val>;
+	F()  = default;
 	void operator()() {
 		std::cout << "nigger" << v.size();
 	}
+	array_t test () const  {
+		array_t arr ;
+		int local__d =0;
+		for(auto i : v) {
+			local__d += int{(int)v.size()+i};
+			array_t arr= {T{local__d}};
+		}
+		return  arr;
+	}
+	array_t cnst = test();
 };
 
 void f(int *x) {
@@ -35,19 +51,33 @@ void create_thread(T size) {
 	for(int i=0;i<1;i++) {
 	t[i] = new std::thread{std::bind(f, &x)};
 	t[i+1] = new std::thread{F<T>(v)}; 
+	t[i+2] = new std::thread{std::bind(large_vector, 10000, 0)}; 
 	(*t[i]).join(); // rejoin on deconstruction ?
 	(*t[i+1]).join();
+	(*t[i+2]).join();
 	}
 }
+namespace std {
+	auto is_same_V__ = []<typename T, typename D>(T a, D b){ return std::is_same<T, D>::value;};
+	constexpr int val__ = std::is_same<int, char>::value;
+};
 
+template<int s>
+constexpr int size = s;
+
+//TODO :organize
 int main() {
 	int d = 0;
-	std::thread *t;
-	std::cout << std::endl<< d;
-	auto ff = []<cons T>(T a) {return typeid(T).name();};
-	std::cout << ff(2);
-	//sIitd::vector<std::jthread> vv;
-	std::cout <<std::is_convertible<int , void>::value;
+	std::vector<int > v;
+	int *x = (int*)malloc(sizeof(int{2}));
+	std::array<std::thread, size<8>> arr ;//= NULL;
+	//
+	//for(auto i :  arr); //.join;
+	//std::cout <<std::is_convertible<int , void>::value;
+	std::cout << std::is_same_V__(1,3);
+	std::array<int , std::val__> a;
+	create_thread(10);
+	F<int>().cnst;
 	std::thread::hardware_concurrency();
 	return 0;
 }
