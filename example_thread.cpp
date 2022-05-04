@@ -5,22 +5,23 @@
 #include<cstdlib>
 
 #include<t.h>
+// uncenessary
 template<typename T>
-concept cons  = requires(T){ 
+concept c_yesConvertable  = requires(T){ 
 	std::is_convertible<T,unsigned int>::value;
 	std::is_convertible<T,unsigned char>::value;
 	std::is_convertible<T,unsigned uint8_t>::value;
 	std::is_convertible<T,unsigned uint8_t*>::value;
 };
 
-template<cons T>
-class F {
+template<c_yesConvertable  T>
+class F_test {
 	std::vector<T> v;
 	public:
-	F(std::vector<T> vv) : v{vv} {}
+	F_test(std::vector<T> vv) : v{vv} {}
 	static constexpr int val = 1;
 	using array_t = std::array<T, val>;
-	F()  = default;
+	F_test()  = default;
 	void operator()() {
 		std::cout << "nigger" << v.size();
 	}
@@ -29,7 +30,7 @@ class F {
 		int local__d =0;
 		for(auto i : v) {
 			local__d += int{(int)v.size()+i};
-			array_t arr= {T{local__d}};
+			arr = {T{local__d}}; // need assignment members for `array_t`
 		}
 		return  arr;
 	}
@@ -77,7 +78,7 @@ int main() {
 	std::cout << std::is_same_V__(1,3);
 	std::array<int , std::val__> a;
 	create_thread(10);
-	F<int>().cnst;
+	F_test<int>().cnst;
 	std::thread::hardware_concurrency();
 	return 0;
 }

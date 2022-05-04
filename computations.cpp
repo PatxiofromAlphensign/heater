@@ -28,16 +28,16 @@ struct F {
 		x=x_;
 	}
 };
-
 template<>
 F<int>::F(std::vector<int> &v) { }
-//template<typename T>
-//T type_pointer_rec(T a, int base=0) {
-//	if(base>1) return a;
-//	return type_pointer_rec<T*>(&a, base+1);
-//}
-//
 
+template<typename T>
+T type_pointer_rec(T a, int base=0) { //very dangerous, might mess up compiler with pointer recursion
+	if(base>1) return a;
+	return type_pointer_rec<T*>(&a, base+1);
+}
+
+// TODO: dipict the algoritm and flow of the function  
 int large_vector(int size,int base) {
 	if(base>size) return base;
 	std::vector<int> v;
