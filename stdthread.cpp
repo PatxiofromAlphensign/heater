@@ -3,11 +3,12 @@
 #include<functional>
 #include<iostream>
 
+template<typename T>
 class thread {
 	std::vector<std::jthread> threads;
 	public:
 	thread() = default;
-	thread(int count, float (*f)(int, float, float)) {
+	thread(int count, T f) {
 		for(int i=0;i<count;i++) {
 			threads.push_back(std::move(std::jthread(std::bind(f, count,1,1))));
 		}
