@@ -5,7 +5,7 @@
 #include<string>
 #include<iostream>
 
-#include<thread.h>
+#include<t.h>
 
 template<typename T>
 struct F {

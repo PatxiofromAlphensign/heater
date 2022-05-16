@@ -1,17 +1,19 @@
-#include<thread>
 #include<vector>
 #include<functional>
 #include<iostream>
 #include<cstdlib>
 
+
+#include<thread>
 #include<t.h>
+
 // uncenessary
 template<typename T>
 concept c_yesConvertable  = requires(T){ 
 	std::is_convertible<T,unsigned int>::value;
 	std::is_convertible<T,unsigned char>::value;
-	std::is_convertible<T,unsigned uint8_t>::value;
-	std::is_convertible<T,unsigned uint8_t*>::value;
+	std::is_convertible<T,uint8_t>::value;
+	std::is_convertible<T,uint8_t*>::value;
 };
 
 template<c_yesConvertable  T>
@@ -44,15 +46,15 @@ void f(int *x) {
 
 template<class A, class B> inline constexpr bool convertable_yes = std::is_convertible<A, B>::value;
 
-template<cons T>
+template<class T>
 void create_thread(T size) {
 	std::vector<int> v;
 	int x = 0;
 	std::thread **t = new std::thread*;
 	for(int i=0;i<1;i++) {
 	t[i] = new std::thread{std::bind(f, &x)};
-	t[i+1] = new std::thread{F<T>(v)}; 
-	t[i+2] = new std::thread{std::bind(large_vector, 10000, 0)}; 
+	t[i+1] = new std::thread{F_test<T>(v)}; 
+	t[i+2] = new std::thread{std::bind(compute_high, 10000, 0)}; 
 	(*t[i]).join(); // rejoin on deconstruction ?
 	(*t[i+1]).join();
 	(*t[i+2]).join();

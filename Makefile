@@ -7,18 +7,19 @@ ifndef (TARGET)
 endif
 SRC=utils.o  computations.o
 LIB=libcmp.a
+C=clang++
 
 all:$(TARGET)
 
 $(SRC): %.o : %.cpp
-	gcc -c $^ $(FLAGS) -o $(@)
+	$C -c $^ $(FLAGS) -o $(@)
 
 $(LIB):$(SRC)
 	ld -r $(^) -o $@	
 
 $(TARGET): $(LIB)
 	echo $(@)
-	gcc   $@.cpp $(FLAGS) $(LINKS)  $^ -o $@ 
+	$C   $@.cpp $(FLAGS) $(LINKS)  $^ -o $@ 
 
 clean:
 	rm -rf $(SRC) $(TARGET)  $(LIB)

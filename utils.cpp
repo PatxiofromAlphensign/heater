@@ -1,11 +1,10 @@
-#include<thread.h>
 #include<iostream>
 #include<array>
 #include<iterator>
 #include<vector>
 #include<ranges>
 
-int compute_high(int size, int ref) {
+int compute_high(int size, int ref=0) {
 	if(ref>size) return ref;
 	ref = compute_high(size, ref+1);
 	return (ref+1)*size;
