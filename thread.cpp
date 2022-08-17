@@ -5,7 +5,8 @@
 #include<initializer_list>
 #include<ranges>
 
-#include<thread.h>
+#include<t.h>
+
 
 template<typename T>
 struct F { //std::vector<T> &v;

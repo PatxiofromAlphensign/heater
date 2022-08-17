@@ -68,6 +68,7 @@ namespace std {
 template<int s>
 constexpr int size = s;
 
+template<typename T> typename F_test<T>::array_t arr = F_test<T>().cnst;
 //TODO :organize
 int main() {
 	int d = 0;
@@ -80,7 +81,7 @@ int main() {
 	std::cout << std::is_same_V__(1,3);
 	std::array<int , std::val__> a;
 	create_thread(10);
-	F_test<int>().cnst;
+	std::cout << " "<<arr.size();
 	std::thread::hardware_concurrency();
 	return 0;
 }
